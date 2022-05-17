@@ -8,16 +8,16 @@ Additionally, it highlights the differences to the [former approach](https://git
 
 ## Improvements
 
-Using aspect oriented programming (AOP) design of the SPI...
+Using an aspect oriented programming (AOP) design of the SPI...
 
 1. ...prevents domination of business code by the SPI.
-1. ...hides the BPMS (e.g. for easy upgrades from Camunda 7 to Camunda 8).
+1. ...hides the BPMS (e.g. for easy upgrades from [Camunda 7](https://docs.camunda.org) to [Camunda 8](https://docs.camunda.io)).
 1. ...keeps the business-code readable and maintainable.
-1. ...correct BPMN wiring can be validated at startup of the application.
+1. ...enables validation of correct BPMN wiring at startup of the application.
 
-## TaxiRide example
+## TaxiRide sample
 
-To see all this stuff in action have a look into the taxi ride integration test:
+The components of the sample:
 
 * BPMN:
   [src/main/resources/processes/TaxiRide.bpmn](./src/main/resources/processes/TaxiRide.bpmn)
@@ -27,4 +27,4 @@ To see all this stuff in action have a look into the taxi ride integration test:
 * BPMN tasks implementation:
   [src/main/java/at/phactum/blueprint/taxiride/TaxiRide.java](./src/main/java/at/phactum/blueprint/taxiride/TaxiRide.java)
 
-*Hint:* This Maven project does not provide a runnable Spring Boot application but it runs a Spring Boot integration test to prove the functionality of the `TaxiRide` business bean. Use `mvn verify` to run the test.
+*Hint:* This Maven project does not produce a runnable Spring Boot application but it runs a Spring Boot integration test to prove the functionality of the `TaxiRide` business bean. Use `mvn verify` to run the test.
