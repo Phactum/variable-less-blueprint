@@ -21,8 +21,8 @@ import at.phactum.blueprint.taxiride.service.DriverService;
 @EnableAutoConfiguration
 @EnableJpaAuditing
 @ComponentScan(basePackageClasses = { TaxiRide.class })
-@EnableJpaRepositories(basePackageClasses = { TaxiRide.class })
 @EntityScan(basePackageClasses = { TaxiRide.class })
+@EnableJpaRepositories(basePackageClasses = { TaxiRide.class })
 public class ItConfiguration {
 
     public static class MockDriverService implements DriverService {

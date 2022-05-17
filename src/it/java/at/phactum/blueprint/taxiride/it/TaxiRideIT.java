@@ -15,14 +15,9 @@ import at.phactum.blueprint.taxiride.events.RideBooked;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = ItConfiguration.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
-        properties = {
-                "server.port=8080",
-                "spring.application.name=IT",
-                "workerId=IT",
-                "spring.main.allow-bean-definition-overriding=true"
-            }
-    )
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
+        properties = { "workerId=IT" })
 public class TaxiRideIT {
     
     @Autowired

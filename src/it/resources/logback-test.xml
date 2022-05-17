@@ -8,7 +8,8 @@
         </encoder>
     </appender>
 
-    <logger name="at.phactum" level="INFO"/>
+    <logger name="at.phactum" level="INFO" />
+    <logger name="at.phactum.bp.blueprint" level="TRACE" />
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
