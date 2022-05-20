@@ -28,3 +28,5 @@ The components of the sample:
   [src/main/java/at/phactum/blueprint/taxiride/TaxiRide.java](./src/main/java/at/phactum/blueprint/taxiride/TaxiRide.java)
 
 *Hint:* This Maven project does not produce a runnable Spring Boot application but it runs a Spring Boot integration test to prove the functionality of the `TaxiRide` business bean. Use `mvn verify` to run the test.
+
+*Hint:* This sample uses Camunda 7. If you run [a local installation of Camunda 8](https://docs.camunda.io/docs/self-managed/platform-deployment/docker/#docker-compose) then change Maven dependency `blueprint-camunda7-adapter` to `blueprint-camunda8-adapter` in `pom.xml` and adopt `@ActiveProfiles` in class `TaxiRideIT` from `"camunda7"` to `"camunda8"`.

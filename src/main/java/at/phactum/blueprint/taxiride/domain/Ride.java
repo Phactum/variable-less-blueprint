@@ -2,8 +2,6 @@ package at.phactum.blueprint.taxiride.domain;
 
 import java.time.Duration;
 import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.LinkedList;
 
 import javax.persistence.Column;
@@ -87,23 +85,21 @@ public class Ride {
         this.targetLocation = targetLocation;
     }
 
-    public Date getConfirmationDeadline() {
+    public String getConfirmationDeadline() {
         
         if (Duration
                 .between(OffsetDateTime.now(), pickupTime)
                 .toMinutes() > 20) {
             
-            return Date.from(OffsetDateTime
-                    .now()
-                    .plus(15, ChronoUnit.MINUTES)
-                    .toInstant());
+            return Duration
+                    .ofMinutes(15)
+                    .toString();
                     
         }
         
-        return Date.from(OffsetDateTime
-                .now()
-                .plus(3, ChronoUnit.MINUTES)
-                .toInstant());
+        return Duration
+                .ofMinutes(3)
+                .toString();
         
     }
 

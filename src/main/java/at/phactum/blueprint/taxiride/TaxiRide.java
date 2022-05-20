@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import at.phactum.blueprint.taxiride.domain.Ride;
+import at.phactum.blueprint.taxiride.domain.RideRepository;
 import at.phactum.blueprint.taxiride.events.RideBooked;
 import at.phactum.blueprint.taxiride.service.DriverService;
 import at.phactum.bp.blueprint.process.ProcessService;
@@ -21,11 +22,14 @@ public class TaxiRide {
 
     @Autowired
     private ProcessService<Ride> processService;
+
+    @Autowired
+    private RideRepository rides;
     
     @Autowired
     private DriverService drivers;
 
-    public void rideBooked(
+    public String rideBooked(
             final RideBooked event) {
         
         final var ride = new Ride();
@@ -33,7 +37,9 @@ public class TaxiRide {
         ride.setPickupLocation(event.getPickupLocation());
         ride.setTargetLocation(event.getTargetLocation());
 
-        processService.correlateMessage(ride, event);
+        final var result = processService.correlateMessage(ride, event);
+
+        return result.getId();
         
     }
     
@@ -62,6 +68,25 @@ public class TaxiRide {
         
     }
 
+    public void confirmRide(
+            final String rideId,
+            final String driverId) {
+        
+        final var ride = rides.findById(rideId).get();
+        ride.setDriver(driverId);
+        
+        processService.correlateMessage(ride, "ConfirmRide");
+        
+    }
+    
+    public void finishRide(
+            final String rideId) {
+        
+        final var ride = rides.findById(rideId).get();
+        processService.correlateMessage(ride, "FinishRide");
+        
+    }
+    
     @WorkflowTask
     public void payDriver(
             final Ride ride) {

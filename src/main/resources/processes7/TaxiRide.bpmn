@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gl03ju" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0gl03ju" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
   <bpmn:collaboration id="Collaboration_TaxiRide">
     <bpmn:participant id="Participant_TaxiRide" name="Taxi Service" processRef="TaxiRide" />
     <bpmn:participant id="Participant_Customer" name="Customer" />
@@ -43,7 +43,7 @@
     <bpmn:boundaryEvent id="Event_Deadline" name="Confirmation&#10;deadline&#10;expired" attachedToRef="Activity_ConfirmRide">
       <bpmn:outgoing>Flow_16shdtb</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0cuzrxd">
-        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">${confirmationDeadline}</bpmn:timeDate>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">${confirmationDeadline}</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="Event_NoRideAvailable" name="No ride&#10;available" camunda:asyncBefore="true">
@@ -71,6 +71,11 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0dxymyl" camunda:delegateExpression="${rideAvailable}" />
     </bpmn:intermediateThrowEvent>
     <bpmn:receiveTask id="Activity_ConfirmRide" name="Confirm ride" messageRef="Message_1sm09vb">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="TaxiRide-ConfirmRide">${execution.businessKey}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0iu6kfd</bpmn:incoming>
       <bpmn:outgoing>Flow_1amm3at</bpmn:outgoing>
     </bpmn:receiveTask>

@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -25,10 +27,23 @@ import at.phactum.blueprint.taxiride.service.DriverService;
 @EnableJpaRepositories(basePackageClasses = { TaxiRide.class })
 public class ItConfiguration {
 
+    @Lazy
+    @Autowired
+    private TaxiRide taxiRide;
+
     public static class MockDriverService implements DriverService {
 
         private static final LinkedBlockingQueue<String> EVENTS = new LinkedBlockingQueue<>();
+        
+        private final TaxiRide taxiRide;
 
+        public MockDriverService(
+                TaxiRide taxiRide) {
+            
+            this.taxiRide = taxiRide;
+            
+        }
+        
         @Override
         public Collection<String> determineNearbyDrivers(
                 final String pickupLocation,
@@ -54,6 +69,9 @@ public class ItConfiguration {
             EVENTS.poll(10, TimeUnit.SECONDS);
             EVENTS.poll(10, TimeUnit.SECONDS);
 
+            // wait for any transaction to be completed
+            Thread.sleep(200);
+
         }
 
         @Override
@@ -70,6 +88,24 @@ public class ItConfiguration {
             // expect one event
             EVENTS.poll(10, TimeUnit.SECONDS);
 
+            // wait for any transaction to be completed
+            Thread.sleep(200);
+
+        }
+        
+        public void confirmRide(
+                final String rideId,
+                final String driverId) {
+            
+            taxiRide.confirmRide(rideId, rideId);
+            
+        }
+
+        public void finishRide(
+                final String rideId) {
+            
+            taxiRide.finishRide(rideId);
+            
         }
 
     }
@@ -77,7 +113,7 @@ public class ItConfiguration {
     @Bean
     public MockDriverService mockDriverService() {
 
-        return new MockDriverService();
+        return new MockDriverService(taxiRide);
 
     }
 
