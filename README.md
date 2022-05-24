@@ -1,17 +1,17 @@
-![Blueprint SpringBoot](./logo.png)
+![Draft](./draft.png)
 
-# Smallest possible Blueprint sample
+# Smallest possible Taxi Ride Blueprint sample
 
-This is a code-sample which shows how the [BPMN Blueprint SPI](https://github.com/stephanpelikan/bp-blueprint) simplifies building business processing applications. The Blueprint is used to implement a reduced taxi ride process.
+This is a code-sample which shows how the [Taxi Ride Blueprint SPI](https://github.com/phactum/taxiride-blueprint) simplifies building business processing applications.
 
-Additionally, it highlights the differences to the [former approach](https://github.com/phactum-at/variable-less) presented at the talk *"How to Say Goodbye to Process Variables"* which was part of the [Camunda-Summit 2022](https://summit.camunda.com/expert-sessions/).
+Additionally, it highlights the differences to the [former approach](https://github.com/phactum-at/variable-less) since it implements the same reduced taxi process. This former approach has been used in past projects and has been presented at the talk *["How to Say Goodbye to Process Variables"](https://page.camunda.com/ccs2022-goodbyetoprocessvariables)* which was part of the [Camunda-Summit 2022](https://summit.camunda.com/expert-sessions/). Checkout the improvements-section underneath to get a brief summary of differences.
 
 ## Improvements
 
 Using an aspect oriented programming (AOP) design of the SPI...
 
 1. ...prevents domination of business code by the SPI.
-1. ...hides the BPMS (e.g. for easy upgrades from [Camunda 7](https://docs.camunda.org) to [Camunda 8](https://docs.camunda.io)).
+1. ...hides the workflow system API (e.g. for easy upgrades from [Camunda 7](https://docs.camunda.org) to [Camunda 8](https://docs.camunda.io)).
 1. ...keeps the business-code readable and maintainable.
 1. ...enables validation of correct BPMN wiring at startup of the application.
 

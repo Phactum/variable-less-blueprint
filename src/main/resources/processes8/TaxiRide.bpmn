@@ -35,7 +35,7 @@
         <zeebe:taskDefinition type="requestRide" />
         <zeebe:ioMapping>
           <zeebe:input source="=loopCounter" target="Activity_RequestRide_index" />
-          <zeebe:output source="=count(requestRide)" target="Activity_RequestRide_total" />
+          <zeebe:input source="=count(nearbyDrivers)" target="Activity_RequestRide_total" />
         </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0xf4hqi</bpmn:incoming>
