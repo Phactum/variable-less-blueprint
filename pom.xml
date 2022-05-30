@@ -17,9 +17,9 @@
 
 	<repositories>
 		<repository>
-			<id>bp-blueprint</id>
-			<name>Business Processing Blueprint</name>
-			<url>https://maven.pkg.github.com/stephanpelikan/bp-blueprint/</url>
+			<id>taxiride-blueprint</id>
+			<name>Taxi Ride Blueprint</name>
+			<url>https://maven.pkg.github.com/Phactum/taxiride-blueprint/</url>
 			<releases>
 				<enabled>false</enabled>
 			</releases>
@@ -115,7 +115,7 @@
 		<dependency>
 			<groupId>at.phactum.bp.blueprint</groupId>
 			<artifactId>blueprint-camunda7-adapter</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
