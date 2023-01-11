@@ -1,19 +1,18 @@
 package at.phactum.blueprint.taxiride;
 
-import java.util.LinkedList;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import at.phactum.blueprint.taxiride.domain.Ride;
 import at.phactum.blueprint.taxiride.domain.RideRepository;
 import at.phactum.blueprint.taxiride.events.RideBooked;
 import at.phactum.blueprint.taxiride.service.DriverService;
-import at.phactum.bp.blueprint.process.ProcessService;
-import at.phactum.bp.blueprint.service.MultiInstanceIndex;
-import at.phactum.bp.blueprint.service.WorkflowService;
-import at.phactum.bp.blueprint.service.WorkflowTask;
+import io.vanillabp.spi.process.ProcessService;
+import io.vanillabp.spi.service.MultiInstanceIndex;
+import io.vanillabp.spi.service.WorkflowService;
+import io.vanillabp.spi.service.WorkflowTask;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.LinkedList;
 
 @Service
 @WorkflowService(workflowAggregateClass = Ride.class)
